@@ -18,8 +18,8 @@ export default function Routes() {
     return (
         <NavigationContainer>
             <Stack.Navigator screenOptions={screenOptionStyle}>
-                <Stack.Screen name="Home" component={Home} />
-                <Stack.Screen name="Metas" component={Metas} />
+                <Stack.Screen name="Home" component={Home} options={{ headerTitle: "Dashboard"}}/>
+                <Stack.Screen name="Metas" component={Metas} options={{ headerTitle: "Listar"}}/>
             </Stack.Navigator>
         </NavigationContainer>
     )

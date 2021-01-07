@@ -15,3 +15,9 @@ Dependências do React Navigation
 
 Instalar o React Navigation Stack
 ### npm install @react-navigation/stack
+
+Transformar CSS em componentes
+### npm install -save styled-components
+
+Realizar chamada para API
+### npm install axios --save
