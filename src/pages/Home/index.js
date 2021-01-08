@@ -9,12 +9,17 @@ export default function Home() {
     const Metas = () => {
         navigation.navigate('Metas')
     }
+
+    const AddMeta = () => {
+        navigation.navigate('AddMeta')
+    }
+
     return (
         <Container>
             <Btn onPress={Metas}>
                 <Btntxt>Listar</Btntxt>
             </Btn>
-            <Btn>
+            <Btn onPress={AddMeta}>
                 <Btntxt>Cadastrar</Btntxt>
             </Btn>
         </Container>

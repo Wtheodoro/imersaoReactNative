@@ -1,20 +1,24 @@
 import React, { useState, useCallback } from 'react'
-import { Container,TitleList, ListMetas, ItemMeta, TitleItem, DescriptionItem } from './styles'
+import { Container,TitleList, ListMetas, ItemMeta, TitleItem, DescriptionItem, LoadingArea } from './styles'
 import { useFocusEffect } from '@react-navigation/native';
-import { Alert } from 'react-native';
+import { Alert, ActivityIndicator } from 'react-native';
 
 import api from '../../config/api';
 
 export default function Metas() {
 
     const [metas, SetMetas] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const getMetas = async () => {
+        setLoading(true)
         try {
             const response = await api.get('/metas')    
-            SetMetas(response.data.metas)       
+            SetMetas(response.data.metas) 
+            setLoading(false)      
         } catch (error) {
-            Alert.alert("", "Erro de conexão com a API")
+            Alert.alert("", "Erro: Nenhuma meta encontrada, tente mais tarde!")
+            setLoading(false)
         }
     }
 
@@ -27,6 +31,7 @@ export default function Metas() {
     return (
         <Container>
             <TitleList>Lista de Metas</TitleList>
+            {loading ? <LoadingArea><ActivityIndicator size="large" color="#fff" /></LoadingArea> : 
             <ListMetas data={metas} renderItem={({item}) => (
                 <ItemMeta>
                     <TitleItem>{item.name}</TitleItem>
@@ -35,6 +40,7 @@ export default function Metas() {
                 </ItemMeta>
             )} keyExtractor={meta => String(meta._id)}
             />
+            }
         </Container>   
     )
 }
